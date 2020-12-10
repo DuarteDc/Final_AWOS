@@ -16,13 +16,13 @@ Route::get('/', function () {
 });
 Route::get('/usuarios', function () {
     return view('Usuarios');
-});
+})->name('usuarios');
 Route::get('/productos', function () {
     return view('Productos');
-});
+})->name('productos');
 Route::get('/ventas', function () {
     return view('Ventas');
-});
+})->name('ventas');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
