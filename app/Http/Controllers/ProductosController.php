@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class ProductosController extends Controller
 {
+    public function __construct (productos $producto) {
+        $this->producto = $producto;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -81,10 +84,9 @@ class ProductosController extends Controller
      * @param  \App\productos  $productos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(productos $productos)
+    public function destroy($id)
     {
         $producto = productos::find($id);
         $producto->delete();
-        return "El registro se elimino con existo";
     }
 }

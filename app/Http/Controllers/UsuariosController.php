@@ -2,23 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\ventas;
 use Illuminate\Http\Request;
-
-class VentasController extends Controller
+use App\User;
+class UsuariosController extends Controller
 {
-    public function __construct (ventas $venta) {
-        $this->venta = $venta;
+    public function __construct (User $usuario) {
+        $this->usuario = $usuario;
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function page(){
+        return view('usuarios.index');
+    }
+
     public function index()
     {
-        $ventas = ventas::all();
-        return response()->json(['ventas'=> $ventas]);
+        $usuarios = User::all();
+        return response()->json(['usuarios'=> $usuarios]);
     }
 
     /**
@@ -39,28 +43,30 @@ class VentasController extends Controller
      */
     public function store(Request $request)
     {
-        $venta = $this->venta->create($request->all());
-            return;
+        $usuario = new User;
+        $usuario->create($request->all());
+        return response()->json($usuario);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\ventas  $ventas
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(ventas $ventas)
+    public function show($id)
     {
-        //
+        $id_us=User::find($id);
+        return ($id_us);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ventas  $ventas
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(ventas $ventas)
+    public function edit($id)
     {
         //
     }
@@ -69,25 +75,25 @@ class VentasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ventas  $ventas
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(Request $request, $id)
     {
-        ventas::find($id)->update($request->all());
-        return  $request->all();
+        User::find($id)->update($request->all());
+        return ;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ventas  $ventas
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $venta = ventas::find($id);
-        $venta->delete();
-        return "El registro se elimino con existo";
+        $usuarios = User::find($id);
+        $usuarios->delete();
     }
 }
+
