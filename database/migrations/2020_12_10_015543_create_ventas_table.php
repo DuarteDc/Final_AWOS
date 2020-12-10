@@ -13,10 +13,13 @@ class CreateVentasTable extends Migration
      */
     public function up()
     {
-        Schema::create('productos', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('ventas', function (Blueprint $table) {
             $table->increments('id');
             $table->double('cantidad');
+            $table->integer('producto_id')->unsigned();
+            $table->foreign('producto_id')->references('id')->on('productos');
+            $table->integer('users_id')->unsigned();
+            $table->foreign('users_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
